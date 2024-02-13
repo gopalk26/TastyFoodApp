@@ -1,4 +1,504 @@
 
-#child{
-    color: blue;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fc8019;
+    padding: 10px 20px;
+    border-radius: 10px; /* Add border-radius for rounded corners */
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .logo img {
+    width: 50px;
+    height: auto;
+    border-radius: 50%; /* Make the logo a circle by adding border-radius */
+  }
+  
+  .nav-items ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-items ul li {
+    padding: 10px 15px;
+    margin-right: 10px;
+    font-size: 16px;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px; /* Add border-radius for rounded corners on each navigation item */
+  }
+  
+  .nav-items ul li:hover {
+    background-color: #f28436;
+    border-radius: 5px;
+  }
+  .nav-items  button.login {
+    padding: 10px 15px;
+    margin-right: 10px;
+    margin:-6px 10px;
+    font-size: 15px;
+    color: #fff;
+    background-color: #f28436; /* Add your desired button background color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .nav-items button.login:hover {
+    background-color: #f28436; /* Add your desired button hover background color */
+  }
+  .body-contianer{
+    width:10px;
+   
+  }
+  body {
+    
+    margin-left: 60px; /* Increase left margin */
+    margin-right: 60px; /* Increase right margin */
+    /* Add other styles for body if needed */
+  }
+  /* Adjusted styles for .restcard */
+/* Updated styles for .restcard */
+.restcard {
+  width: 240px; /* Reduced width */
+  height: auto;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 10px; /* Adjusted margin for smaller size */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+
+
+.restcard img {
+  width: 100%;
+  height: 150px; /* Reduced image height */
+  object-fit: cover;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.restcard-details {
+  padding: 12px; /* Adjusted padding for smaller size */
+  text-align: left;
+}
+
+.restcard-details h3 {
+  font-size: 0.9em; /* Slightly reduced font size */
+  color: #333;
+  margin: 8px 0 4px; /* Adjusted margins for smaller size */
+}
+
+.restcard-details h4 {
+  font-size: 0.8em; /* Further reduced font size */
+  color: #666;
+  margin: 4px 0;
+}
+
+.restcard-details .rating {
+  color: #ff9900;
+  font-weight: bold;
+}
+
+.restcard:hover {
+  cursor: pointer;
+  border-color: #ffcc00;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: scale(1.03);
+}
+
+.rest-Container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 20px; /* Adjusted overall container margin for smaller size */
+}
+
+/*styles for filer*/
+.filter{
+  margin: 20px 0 20px 50px;
+
+}
+.filter-btn{
+  border-radius: 20px;
+  padding: 8px 8px;
+  cursor: pointer;
+  border-color: #f28436;
+  background-color: white;
+  color: black;
+
+  
+}
+.filter-btn:hover{
+
+  background-color: #f28436;
+   color: white;
+  border-color: #c3121b;
+
+}
+/*style search*/
+.search {
+  position: sticky;
+  left: 0; /* Positioning on the left side */
+  top: 0;
+  z-index: 999;
+  background-color: #ffffff;
+  padding: 20px 20px;
+  text-align: center;
+}
+
+.search-input {
+  width: 60%;
+  max-width: 400px;
+  box-sizing: border-box;
+  border-radius: 25px;
+  background-color: #f0f2f5;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  outline: none;
+}
+
+.search-btn {
+  background-color: #0768b3;
+  color: #ffffff;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  outline: none;
+}
+
+.search-btn:hover {
+  background-color: #f28436;
+}
+
+
+
+
+
+
+
+/*Shimmer CSS */
+.shimmer-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: center;
+}
+.shimmer-card {
+  flex-basis: 250px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-color: #d3d5df;
+  box-shadow: 0 4px 7px 0 rgb(218 220 230 / 60%);
+}
+.shimmer-title {
+  width: 60%;
+  margin-top: 10px;
+}
+.shimmer-tags {
+  width: 80%;
+  margin-top: 4px;
+}
+.shimmer-details {
+  width: 100%;
+  margin-top: 18px;
+}
+.shimmer-container .shimmer-img {
+  height: 144px;
+  width: 230px;
+}
+
+/*Animation to Shimmer Component Cards */
+.stroke {
+  height: 15px;
+  background: #777;
+}
+.animate {
+  animation: shimmer 3s;
+  animation-iteration-count: infinite;
+  background: linear-gradient(to right, #e6e6e6 5%, #cccccc 25%, #e6e6e6 35%);
+  background-size: 1000px 100%;
+}
+@keyframes shimmer {
+  from {
+    background-position: -1000px 0;
+  }
+  to {
+    background-position: 1000px 0;
+  }
+}
+/*abou page */
+.about-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row; 
+  margin: 50px auto;
+  justify-content: center;
+  align-items: center;
+  max-width: 1200px;
+}
+
+.about-left {
+  flex-basis: 50%;
+  padding: 50px;
+  position: relative;
+  background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.about-left h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  color: var(--dark-orange);
+}
+
+.about-left h1 span {
+  background-color: transparent;
+  color: var(--orange);
+}
+
+.about-left h4 {
+  font-size: 1.25rem;
+  color: var(--dark-orange);
+  font-style: normal;
+  margin-top: 20px;
+}
+
+.about-left h4 span {
+  color: var(--orange);
+}
+
+.about-right {
+  flex-basis: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-right img {
+  width: 300px;
+  height: 200px;
+  border-radius: 8px;
+}
+/* contact page */
+.contact-form {
+  max-width: 500px;
+  margin: auto;
+  background-color: #f4f4f4; /* Light gray background */
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.contact-header h1 {
+  color: #333; /* Dark text color */
+}
+
+.form-container {
+  background-color: #fff; /* White background for form */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Soft shadow effect */
+}
+
+.contact-form h2 {
+  color: #333; /* Dark text color */
+}
+
+.contact-form form input,
+.contact-form form textarea {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 5px;
+}
+
+.contact-form form button {
+  width: calc(100% - 20px);
+  padding: 10px;
+  background-color: #00bcd4; /* Teal color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth hover transition */
+}
+
+.contact-form form button:hover {
+  background-color: #008ba3; /* Darker teal on hover */
+}
+/*Error message*/
+.error-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  opacity: 0;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.error-page img {
+  max-width: 25%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.error-page h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.error-page .error-data {
+  font-size: 18px;
+  color: red;
+  margin-bottom: 20px;
+}
+
+.error-page .error-back-home {
+  font-size: 16px;
+}
+
+.error-page .error-back-home a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.error-page .error-back-home a:hover {
+  text-decoration: underline;
+}
+
+/*css styles for restmenu*/
+.restaurant-menu {
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: 'Arial', sans-serif; /* Ensuring font consistency */
+}
+
+.restaurant-summary {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.restaurant-img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 20px;
+}
+
+.restaurant-summary-details {
+  flex: 1;
+}
+
+.restaurant-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #333; /* Darker color for the title */
+}
+
+.restaurant-tags {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.restaurant-rating {
+  display: inline-block;
+  background-color: #ef4b4c; /* Swiggy red color */
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  margin-right: 5px;
+}
+
+.restaurant-rating span {
+  margin-left: 5px;
+}
+
+.menu-items-container {
+  margin-top: 20px;
+}
+
+.menu-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.menu-item {
+  background-color: white; /* Swiggy uses white cards */
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Adding shadow for depth */
+  transition: box-shadow 0.3s ease-in-out; /* Smooth transition for hover effect */
+}
+
+.menu-item:hover {
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1); /* Enhanced shadow on hover */
+}
+
+.menu-item h4 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #333; /* Darker color for the dish name */
+}
+
+.menu-item-details p {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.menu-item-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+.add-btn {
+  background-color: white; /* Swiggy's button color */
+  color: rgb(58, 183, 5);
+  padding: 10px 20px;
+  
+  border-radius: 20px;
+  cursor: pointer;
+  text-transform: uppercase; /* Making the text uppercase */
+  font-weight: bold; /* Making the text bold */
+  margin-top: 10px; /* Adding space above the button */
+  transition: background-color 0.3s; /* Smooth background color transition */
+}
+
+.add-btn:hover {
+  background-color:  rgb(71, 226, 235); /* Darker shade on hover */
 }

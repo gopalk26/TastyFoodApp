@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { swiggy_menu_api_URL ,RESTAURANT_TYPE_KEY,img_url,item_img_cdn_url,MENU_ITEM_TYPE_KEY } from "../Utils/constants";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
+import RestaurantCategory from "./RestaurantCategory";
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
   const [restaurant, setRestaurant] = useState(null);
   const [menuItems, setMenuItems] = useState([]);
+  const [categories, setCategories] = useState([]); // Declare categories state
 
   useEffect(() => {
     getRestaurantInfo();
@@ -21,20 +23,13 @@ const RestaurantMenu = () => {
       const restaurantData = json?.data?.cards?.map(x => x.card)?.find(x => x && x.card['@type'] === RESTAURANT_TYPE_KEY)?.card?.info || null;
       setRestaurant(restaurantData);
 
-      // Set menu item data
-      const menuItemsData = json?.data?.cards
-  ?.find(x => x.groupedCard)
-  ?.groupedCard?.cardGroupMap?.REGULAR?.cards
-  ?.flatMap(card => card.card?.card?.itemCards || [])
-  ?.map(card => card.card?.info) || [];
+      
 
-      const uniqueMenuItems = [];
-      menuItemsData.forEach((item) => {
-        if (!uniqueMenuItems.find(x => x.id === item.id)) {
-          uniqueMenuItems.push(item);
-        }
-      });
-      setMenuItems(uniqueMenuItems);
+      const newCategories = json?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+        (c) => c.card?.card?.['@type'] === MENU_ITEM_TYPE_KEY || c.card?.card?.['@type'] === "type.googleapis.com/swiggy.presentation.food.v2.NestedItemCategory"
+      );
+      setCategories(newCategories); // Set categories state
+
     } catch (error) {
       console.error("Error fetching restaurant data:", error);
     }
@@ -44,18 +39,20 @@ const RestaurantMenu = () => {
   return !restaurant ? (
     <Shimmer />
   ) : (
-    <div className="restaurant-menu">
-      <div className="restaurant-summary">
+      <div>
+
+   <div className="w-2/12 m-auto font-sans mt-4">
+      <div className="flex mb-5">
         <img
-          className="restaurant-img"
+          className="w-52 h-52 object-cover rounded-lg mr-5"
           src={img_url + restaurant?.cloudinaryImageId}
           alt={restaurant?.name}
         />
-        <div className="restaurant-summary-details">
-          <h2 className="restaurant-title">{restaurant?.name}</h2>
-          <p className="restaurant-tags">{restaurant?.cuisines?.join(", ")}</p>
+        <div className=" flex-shrink-0">
+          <h2 className="font-bold text-base mb-3  flex">{restaurant?.name}</h2>
+          <p className="text-sm mb-2 inline-flex">{restaurant?.cuisines?.join(", ")}</p>
           <div className="restaurant-details">
-            <div className="restaurant-rating" style={
+            <div className="inline-block bg-rose-600 text-white py-1 px-3 rounded-md mr-1" style={
               (restaurant?.avgRating) < 4
                 ? { backgroundColor: "var(--light-red)" }
                 : (restaurant?.avgRating) === "--"
@@ -63,7 +60,7 @@ const RestaurantMenu = () => {
                 : { color: "white" }
             }>
               <i className="fa-solid fa-star"></i>
-              <span>{restaurant?.avgRating}</span>
+              <span className="ml-1">{restaurant?.avgRating}</span>
             </div>
             <div className="restaurant-rating-slash">|</div>
             <div>{restaurant?.sla?.slaString}</div>
@@ -72,31 +69,15 @@ const RestaurantMenu = () => {
           </div>
         </div>
       </div>
-
-      {/* Render menu items */}
-      <div className="menu-items-container">
-        <h3>Menu</h3>
-        <div className="menu-items">
-          {menuItems.map(item => (
-            <div className="menu-item" key={item?.id}>
-              <div className="menu-item-details">
-                <h4>{item?.name}</h4>
-                <p>{item?.description}</p>
-                <p>Price: {item?.price/100}</p>
-              </div>
-              {item?.imageId && (
-                <img
-                  className="menu-item-image"
-                  src={item_img_cdn_url + item?.imageId}
-                  alt={item?.name}
-                />
-              )}
-               <button className="add-btn"> ADD +</button>
-            </div>
-          ))}
-        </div>
-      </div>
+        
     </div>
+        <div>
+         {/* categories accordions */}
+       {categories.map((category) => (
+       <RestaurantCategory key={category?.card?.card?.title} data ={category?.card?.card}/>
+          ))}
+          </div>
+</div>
   );
 };
 

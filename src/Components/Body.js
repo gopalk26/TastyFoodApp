@@ -7,8 +7,10 @@ import Shimmer from './Shimmer';
 import { Link } from "react-router-dom";
 
 const Body = () => {  
-  let [listOfRestaurant, setListOfRestaurant] = useState([]);
-  let [textData, setTextData] = useState("");
+  const [originalList, setOriginalList] = useState([]); // Maintain original list
+  const [listOfRestaurant, setListOfRestaurant] = useState([]);
+  const [textData, setTextData] = useState("");
+  const [searchError, setSearchError] = useState(false); // State to track search error
 
   useEffect(() => {
     fetchData();
@@ -17,44 +19,48 @@ const Body = () => {
   const fetchData = async () => {
     const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.406498&lng=78.47724389999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
     const json = await data.json();
-    setListOfRestaurant(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-   
+    const restaurants = json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+    setListOfRestaurant(restaurants);
+    setOriginalList(restaurants);
   };
 
   const handleSearch = () => {
-    const filterRestaurant = listOfRestaurant.filter((res) => res.info.name.toLowerCase().includes(textData.toLowerCase()));
+    const filterRestaurant = originalList.filter((res) => res.info.name.toLowerCase().includes(textData.toLowerCase()));
+    if (filterRestaurant.length === 0) {
+      setSearchError(true); // Set search error if no results found
+    } else {
+      setSearchError(false);
+    }
     setListOfRestaurant(filterRestaurant);
+  };
+
+  const filterTopRated = () => {
+    const topRatedRestaurants = originalList.filter((res) => res.info.avgRating > 4);
+    setListOfRestaurant(topRatedRestaurants);
   };
 
   return (
     <div className="ml-16 mr-16">
-
-      <div className='filter flex  '> 
-      <div className='search ml-8 mt-8'>
-        <input
-          type='text'
-          className='search-input rounded-xl px-6 py-1 border border-rose-700 focus:outline-none focus:ring-2 focus:ring-rose-500'
-          value={textData}
-          onChange={(e) => setTextData(e.target.value)}
-          placeholder="Search restaurants..."
-        />
-        <button className='search-btn bg-rose-700 text-white rounded-lg px-4 py-1 ml-2 focus:outline-none focus:ring-2 focus:ring-rose-500 hover:bg-rose-500' onClick={handleSearch}>
-          Search
-        </button>
-
-        <button className='rounded-xl px-5 py-1  ml-12  border-double border-4 border-rose-500 hover:bg-rose-200' onClick={() => {
-          let filterList = listOfRestaurant.filter((res) => res.info.avgRating > 4);
-          setListOfRestaurant(filterList);
-        }}>
-          Top Rated Restaurants
-        </button>
-        {listOfRestaurant.length === 0 && <Shimmer />}
-
+      <div className='filter flex'>
+        <div className='search ml-8 mt-8'>
+          <input
+            type='text'
+            className='search-input rounded-xl px-6 py-1 border border-rose-700 focus:outline-none focus:ring-2 focus:ring-rose-500'
+            value={textData}
+            onChange={(e) => setTextData(e.target.value)}
+            placeholder="Search restaurants..."
+          />
+          <button className='search-btn bg-rose-700 text-white rounded-lg px-4 py-1 ml-2 focus:outline-none focus:ring-2 focus:ring-rose-500 hover:bg-rose-500' onClick={handleSearch}>
+            Search
+          </button>
+          <button className='rounded-xl px-5 py-1  ml-12  border-double border-4 border-rose-500 hover:bg-rose-200' onClick={filterTopRated}>
+            Top Rated Restaurants
+          </button>
+          {listOfRestaurant.length === 0 && <Shimmer />}
+          {searchError && <p>No results found.</p>} {/* Display error message */}
+        </div>
       </div>
 
-      </div>
-
-    
       <div className='flex flex-wrap justify-between  m-5 py-4'>
         {listOfRestaurant.map((restaurant) => (
           <Link key={restaurant.info.id} to={"/restmenu/" + restaurant.info.id}>

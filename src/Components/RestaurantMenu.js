@@ -17,7 +17,7 @@ const RestaurantMenu = () => {
 
   async function getRestaurantInfo() {
     try {
-      const proxyUrl = generateProxyUrl(SWIGGY_MENU_API_URL + resId);
+      const proxyUrl = generateProxyUrl(swiggy_menu_api_URL+ resId);
 const response = await fetch(proxyUrl);
       const json = await response.json();
 

@@ -1,10 +1,11 @@
 
 
 import RestaurantCard from './RestaurantCard ';
-import { img_url } from "../Utils/constants";
+import { img_url,swiggy_api ,generateProxyUrl} from "../Utils/constants";
 import { useState,useEffect } from 'react';
 import Shimmer from './Shimmer';
 import { Link } from "react-router-dom";
+
 
 const Body = () => {  
   const [originalList, setOriginalList] = useState([]); // Maintain original list
@@ -17,7 +18,8 @@ const Body = () => {
   }, []);
 
   const fetchData = async () => {
-    const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.406498&lng=78.47724389999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+    const proxyUrl = generateProxyUrl(swiggy_api);
+    const data = await fetch(proxyUrl);
     const json = await data.json();
     const restaurants = json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
     setListOfRestaurant(restaurants);

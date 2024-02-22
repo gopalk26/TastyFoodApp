@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { swiggy_menu_api_URL ,RESTAURANT_TYPE_KEY,img_url,item_img_cdn_url,MENU_ITEM_TYPE_KEY } from "../Utils/constants";
+import { swiggy_menu_api_URL ,RESTAURANT_TYPE_KEY,img_url,item_img_cdn_url,
+  MENU_ITEM_TYPE_KEY , generateProxyUrl} from "../Utils/constants";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
 import RestaurantCategory from "./RestaurantCategory";
@@ -16,7 +17,8 @@ const RestaurantMenu = () => {
 
   async function getRestaurantInfo() {
     try {
-      const response = await fetch(swiggy_menu_api_URL + resId);
+      const proxyUrl = generateProxyUrl(SWIGGY_MENU_API_URL + resId);
+const response = await fetch(proxyUrl);
       const json = await response.json();
 
       // Set restaurant data
@@ -25,9 +27,11 @@ const RestaurantMenu = () => {
 
       
 
-      const newCategories = json?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+      const newCategories = json?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
         (c) => c.card?.card?.['@type'] === MENU_ITEM_TYPE_KEY || c.card?.card?.['@type'] === "type.googleapis.com/swiggy.presentation.food.v2.NestedItemCategory"
       );
+     
+      
       setCategories(newCategories); // Set categories state
 
     } catch (error) {

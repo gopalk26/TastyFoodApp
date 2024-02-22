@@ -11,6 +11,7 @@ import RestaurantMenu from './Components/RestaurantMenu';
 import { Provider } from 'react-redux';
 import appStore from './Utils/appStore';
 import CartPage from './Components/CartPage';
+import Footer from './Components/Footer';
 
 const AppLayout = () => {
   return (
@@ -18,7 +19,7 @@ const AppLayout = () => {
    <div className="app">
       <Header />
       <Outlet/>
-      
+      <Footer/>
     
     </div>
     </Provider>

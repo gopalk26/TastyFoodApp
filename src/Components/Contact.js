@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const Contact = () => {
   const [formData, setFormData] = useState({
     email: '',
-    subject: '',
+    name: '',
     message: ''
   });
 
@@ -22,12 +22,11 @@ const Contact = () => {
       message: ''
     });
   };
-  
 
   return (
     <div className="contact-form flex flex-col items-center justify-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md">
-        <img className="mx-auto mb-6" src='https://media.istockphoto.com/id/1441262452/photo/communication-and-technology-concept-hand-putting-wooden-block-cube-symbol-telephone-email.webp?b=1&s=170667a&w=0&k=20&c=FtxQlZeGn__5ZHpc5zi9tx0GVTDZuZQoQcHT7mxDY4Q=' alt="Contact Image" />
+        <img className="mx-auto mb-6" src='https://media.istockphoto.com/id/1441262452/photo/communication-and-technology-concept-hand-putting-wooden-block-cube-symbol-telephone-email.webp?b=1&s=170667a&w=0&k=20&c=FtxQlZeGn__5ZHpc5zi9tx0GVTDZuZQoQcHT7mxDY4Q=' alt="Contact Image" loading="lazy" />
         <div className="text-center mb-6">
           <h1 className="text-3xl font-semibold text-gray-800">Contact Us</h1>
         </div>
@@ -49,7 +48,7 @@ const Contact = () => {
                 className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
                 type="text" 
                 name="name" 
-                placeholder="Enter The Name" 
+                placeholder="Enter Your Name" 
                 value={formData.name} 
                 onChange={handleChange}  
               />

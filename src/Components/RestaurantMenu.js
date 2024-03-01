@@ -27,7 +27,7 @@ const response = await fetch(proxyUrl);
 
       
 
-      const newCategories = json?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+      const newCategories = json?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
         (c) => c.card?.card?.['@type'] === MENU_ITEM_TYPE_KEY || c.card?.card?.['@type'] === "type.googleapis.com/swiggy.presentation.food.v2.NestedItemCategory"
       );
      

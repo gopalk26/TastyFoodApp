@@ -29,5 +29,5 @@ npm run start
 
 
 Explore Live
-Check out the live version of the project https://tasty-food-app-two.vercel.app/ and experience the magic of foodie-apps in action!
+Check out the live version of the project https://tasty-food-app-ebon.vercel.app/ and experience the magic of foodie-apps in action!
 
